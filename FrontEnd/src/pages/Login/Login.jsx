@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import img1 from "../../components/img/1.png";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   
@@ -25,9 +26,6 @@ const Login = () => {
  
   };
 
-  const goToSignUp = () => {
-    navigate("/singup");
-  };
 
   return (
     <div className="overflow-hidden">
@@ -55,12 +53,12 @@ const Login = () => {
         >
           Iniciar Sesion
         </button>
-        <button
-          className="w-full max-w-md bg-[#2D9596] flex items-start text-[#ffffff]  px-6 py-5 rounded-md font-bold"
-          onClick={goToSignUp}
-        >
+        <Link to={'/signUp'}  className="w-full max-w-md bg-[#2D9596] flex items-start text-[#ffffff]  px-6 py-5 rounded-md font-bold"> 
+        <button>
           Crear Cuenta
         </button>
+        </Link>
+      
       </div>
     </div>
   );
