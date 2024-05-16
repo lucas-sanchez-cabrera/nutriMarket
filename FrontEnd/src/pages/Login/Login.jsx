@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import img1 from "../../components/img/1.png";
+import img1 from "../../assets/img/1.png";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -8,7 +8,6 @@ const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
