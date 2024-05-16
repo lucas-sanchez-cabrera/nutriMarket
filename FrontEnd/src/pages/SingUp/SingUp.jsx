@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import img1 from "../../components/img/1.png";
+import img1 from "../../assets/img/1.png";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
-  const [numberPhone, setNumberPhone] = useState("");
   const [direction, setDirection] = useState("");
   const rol = "client";
 
@@ -28,7 +27,7 @@ const SignUp = () => {
       userName: userName,
       email: email,
       password: password,
-      numberPhone: numberPhone,
+
       direction: direction,
       rol: rol,
     };
@@ -50,12 +49,13 @@ const SignUp = () => {
           />
 
           <div className="flex max-w-md mb-4 gap-4">
-            <input
-              type="text"
-              placeholder="Telefono"
-              className=" px-6 py-4 border border-[#656565] rounded-md"
-              onChange={(e) => setNumberPhone(e.target.value)}
-            />
+           <input
+            type="text"
+            placeholder="Correo Electrónico"
+            className=" px-6 py-4 border border-[#656565] rounded-md"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
 
             <input
               type="text"
@@ -65,12 +65,6 @@ const SignUp = () => {
             />
           </div>
 
-          <input
-            type="text"
-            placeholder="Correo Electrónico"
-            className="w-full max-w-md px-6 py-4 border border-[#656565] rounded-md mb-4"
-            onChange={(e) => setEmail(e.target.value)}
-          />
 
           <input
             type="password"
