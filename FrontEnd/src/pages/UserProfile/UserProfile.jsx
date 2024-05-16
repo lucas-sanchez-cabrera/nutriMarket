@@ -48,7 +48,7 @@ export default function UserProfile() {
     <>
       <Navbar />
       <main className="flex m-10 justify-center ">
-        <section className="bg-[#a7a9b14b] w-[60%] flex flex-col mt-24 h-[87%] rounded-md p-6">
+        <section className="bg-[#a7a9b14b] w-[60%] flex flex-col mt-24 h-[87%] rounded-md p-6 shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
           <header className="flex justify-between w-full">
             <h4 className="text-2xl font-semibold">Configuración</h4>
             <div>
