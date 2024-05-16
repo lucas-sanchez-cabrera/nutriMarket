@@ -10,12 +10,15 @@ import imgProfile from "../../assets/img/default-img.webp";
 export default function UserProfile() {
   const [changeInfo, setChangeInfo] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [inputPassword, setInputPassword] = useState("felixmaricon");
+  const [inputEmail, setInputEmail] = useState("lucas.elzardo@gmail.com");
+  const [inputDireccion, setInputDireccion] = useState(
+    "Las Palmas de Gran Canaria, Tindaya, 12"
+  );
 
   const inputPasswordRef = useRef("");
   const inputEmailRef = useRef("");
   const inputDireccionRef = useRef("");
-
-
 
   const togglePasswordVisibility = (ref, showPassword, setShowPassword) => {
     setShowPassword(!showPassword);
@@ -27,23 +30,19 @@ export default function UserProfile() {
     const inputPassword = inputPasswordRef.current;
     const inputEmail = inputEmailRef.current;
     const inputDireccion = inputDireccionRef.current;
-  
-    if (!changeInfo) {
 
+    if (!changeInfo) {
       inputEmail.removeAttribute("disabled");
       inputPassword.removeAttribute("disabled");
       inputDireccion.removeAttribute("disabled");
-    
     } else {
-
-      document.querySelectorAll('input').forEach(input => {
+      document.querySelectorAll("input").forEach((input) => {
         if (input !== inputPassword || showPassword) {
           input.setAttribute("disabled", "disabled");
         }
       });
     }
   };
-  
 
   return (
     <>
@@ -53,7 +52,7 @@ export default function UserProfile() {
           <header className="flex justify-between w-full">
             <h4 className="text-2xl font-semibold">Configuración</h4>
             <div>
-            {changeInfo ? (
+              {changeInfo ? (
                 <button
                   className="flex items-center py-4 px-12 text-base-50 bg-emerald-400 h-12 w-12  gap-3 rounded-lg text-lg justify-center"
                   onClick={handleActiveFormToChangeUserData}
@@ -74,7 +73,9 @@ export default function UserProfile() {
             <form className="flex gap-x-40">
               <section className="flex flex-col gap-y-4">
                 <label className="flex flex-col gap-y-2 ">
-                  <span className="text-sm cursor-pointer">Nombre Y Apellidos</span>
+                  <span className="text-sm cursor-pointer">
+                    Nombre Y Apellidos
+                  </span>
                   <div className="relative">
                     <div className="absolute top-3 left-2 z-10">
                       <UserIcon className="fill-[#EFF1F999] stroke-black " />
@@ -96,9 +97,10 @@ export default function UserProfile() {
                     </div>
                     <input
                       className="px-2 py-3 pl-10 w-96 bg-[#ffffff] rounded-md"
-                      disabled
-                      value="lucas.elzardo@gmail.com"
+                      disabled={!changeInfo}
+                      value={inputEmail}
                       ref={inputEmailRef}
+                      onChange={(e) => setInputEmail(e.target.value)}
                     />
                   </div>
                 </label>
@@ -110,10 +112,10 @@ export default function UserProfile() {
                     </div>
                     <input
                       className="px-2 py-3 pl-10 w-96 bg-[#ffffff] rounded-md"
-                      disabled
-                      value="Las Palmas de Gran Canaria, Tindaya, 12"
+                      disabled={!changeInfo}
+                      value={inputDireccion}
                       ref={inputDireccionRef}
-                      
+                      onChange={(e) => setInputDireccion(e.target.value)}
                     />
                   </div>
                 </label>
@@ -128,11 +130,12 @@ export default function UserProfile() {
                     </div>
                     <input
                       className="px-2 py-3 pl-10 w-96 bg-[#ffffff] rounded-md"
-                      value= 'felixmaricon'
+                      value={inputPassword}
                       type={showPassword ? "text" : "password"}
                       ref={inputPasswordRef}
-                      id = 'password'
-                      disabled
+                      id="password"
+                      disabled={!changeInfo}
+                      onChange={(e) => setInputPassword(e.target.value)}
                     />
                     <div
                       className="absolute top-3 right-5 z-10 cursor-pointer"
@@ -154,10 +157,7 @@ export default function UserProfile() {
                 </label>
               </section>
               <section className="size-44 object-cover relative">
-                <img
-                  src= {imgProfile}
-                  className="shadow-md rounded-md"
-                />
+                <img src={imgProfile} className="shadow-md rounded-md" />
               </section>
             </form>
           </section>
