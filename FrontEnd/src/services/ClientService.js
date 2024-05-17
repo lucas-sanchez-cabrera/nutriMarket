@@ -19,11 +19,11 @@ export async function getClientById(clientId) {
 }
 
 export async function getClientByRol(clientRol) {
-    return await axios.get(`${ API_URL }/rol/?rol=${ clientRol }`);
+    return await axios.get(`${ API_URL }/rol?rol=${ clientRol }`);
 }
 
 export async function loginUser(clientEmail, clientPassword) {
-    return await axios.get(`${ API_URL }/login/?userEmail=${ clientEmail }&userPassword=${ clientPassword }`);
+    return await axios.get(`${ API_URL }/login?userEmail=${ clientEmail }&userPassword=${ clientPassword }`);
 }
 
 export async function deleteClientByPassword(clientPassword) {

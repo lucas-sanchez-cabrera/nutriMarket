@@ -11,9 +11,9 @@ export async function getProductsByTrolleyId(trolleyId) {
 }
 
 export async function deleteProductOfTrolley(productId, trolleyId) {
-    return await axios.delete(`${ API_URL }/delete/productId-trolleyId/?productId=${ productId }&trolleyId=${ trolleyId }`);
+    return await axios.delete(`${ API_URL }/delete/productId-trolleyId?productId=${ productId }&trolleyId=${ trolleyId }`);
 }
 
 export async function updateProductOfTrolley(trolleyId, productQuantity) {
-    return await axios.post(`${ API_URL }/id-cantidad/?trolleyId=${ trolleyId }&productQuantity=${ productQuantity }`);
+    return await axios.post(`${ API_URL }/id-cantidad?trolleyId=${ trolleyId }&productQuantity=${ productQuantity }`);
 }
