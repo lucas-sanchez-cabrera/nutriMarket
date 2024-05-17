@@ -7,7 +7,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
 
-      <div className="bg-white p-5 rounded-lg">
+      <div className="bg-white p-8 rounded-lg">
         <div className="flex justify-end">
           <button className="mb-4" onClick={onClose}>
             <CrossIcon className="stroke-black" />
@@ -34,7 +34,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
 
           <div className="flex gap-4">
             <h1 className="font-bold text-base">Descripión: </h1>
-            <p>{product.productDescription}</p>
+            <p className="text-justify w-64">{product.productDescription}</p>
           </div>
 
 

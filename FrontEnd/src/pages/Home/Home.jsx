@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <>
       <Navbar onSearch={handleSearch} />
-      <main className="flex gap-3 flex-wrap w-full justify-center">
+      <main className="flex gap-3 flex-wrap w-full justify-center ">
         {filteredProducts.map((product, index) => (
          
           <div key={index}>
