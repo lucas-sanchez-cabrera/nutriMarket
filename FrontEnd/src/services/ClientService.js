@@ -6,6 +6,10 @@ export async function createClient(client) {
     return await axios.post(API_URL, client);
 }
 
+export async function signupUser(client) {
+    return await axios.post(`${ API_URL }/signup`, client);
+}
+
 export async function getClients() {
     return await axios.get(API_URL);
 }
@@ -18,8 +22,8 @@ export async function getClientByRol(clientRol) {
     return await axios.get(`${ API_URL }/rol/?rol=${ clientRol }`);
 }
 
-export async function getClientByEmailAndPassword(clientEmail, clientPassword) {
-    return await axios.get(`${ API_URL }/email-password/?email=${ clientEmail }&password=${ clientPassword }`);
+export async function loginUser(clientEmail, clientPassword) {
+    return await axios.get(`${ API_URL }/login/?userEmail=${ clientEmail }&userPassword=${ clientPassword }`);
 }
 
 export async function deleteClientByPassword(clientPassword) {
