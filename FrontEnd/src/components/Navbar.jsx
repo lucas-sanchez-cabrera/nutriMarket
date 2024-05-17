@@ -4,13 +4,18 @@ import { Link, useLocation } from "react-router-dom"; // Import useLocation hook
 import { CartIcon } from "./icons/cart-icon";
 import img1 from "../assets/img/1.2-removebg-preview.png";
 
-export const Navbar = ({}) => {
+export const Navbar = ({ onSearch }) => {
   const isSearchVisible =
     location.pathname === "/home" ||
-    location.pathname === "/cart" ||
     location.pathname === "/";
 
   const isUserProfileInvisible = location.pathname != "/userProfile";
+  const isCartInvisible = location.pathname != "/cart";
+
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    onSearch(query);
+  };
 
   return (
     <div className="bg-[#265073] w-full h-20 flex items-center justify-center">
@@ -26,6 +31,7 @@ export const Navbar = ({}) => {
               className="rounded h-8  w-72 p-2"
               type="search"
               placeholder="Buscar"
+              onChange={handleSearch}
             />
           </div>
         )}
@@ -38,11 +44,14 @@ export const Navbar = ({}) => {
             </div>
           )}
 
-          <div>
-            <Link to={`/cart`}>
-              <CartIcon className="size-9" />
-            </Link>
-          </div>
+          {isCartInvisible && (
+            <div>
+              <Link to={`/cart`}>
+                <CartIcon className="size-9" />
+              </Link>
+            </div>
+          )}
+
           <Link to={`/login`}>
             <button className="bg-white text-black rounded p-2">
               Iniciar Sesion
