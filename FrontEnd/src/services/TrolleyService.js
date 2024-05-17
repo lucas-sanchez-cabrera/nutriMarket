@@ -6,12 +6,12 @@ export async function createTrolley(trolley) {
     return await axios.post(API_URL, trolley);
 }
 
-export async function getTrolleys(trolley) {
-    return await axios.get(API_URL, trolley);
+export async function getTrolleys() {
+    return await axios.get(API_URL);
 }
 
-export async function getTrolleyById(trolleyId) {
-    return await axios.get(`${ API_URL }/${ trolleyId }`);
+export async function getTotalPrice(trolleyId) {
+    return await axios.get(`${ API_URL }/total_price/${ trolleyId }`);
 }
 
 export async function getTrolleyByUserId(clientId) {
@@ -22,6 +22,6 @@ export async function deleteTrolleyById(trolleyId) {
     return await axios.delete(`${ API_URL }/delete/${ trolleyId }`);
 }
 
-export async function createTrolley(trolleyId, trolleyMod) {
+export async function updateTrolley(trolleyId, trolleyMod) {
     return await axios.post(`${ API_URL }/update/${ trolleyId }`, trolleyMod);
 }
