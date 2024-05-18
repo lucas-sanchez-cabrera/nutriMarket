@@ -1,28 +1,34 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-export default function PrivateRoute({ onlylogged }) {
+export default function PrivateRoute({ onlylogged, allowedRoles }) {
   const [changePage, setChangePage] = useState();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
-    const logged = localStorage.getItem("userData") ? true : false;
-
-    const chechIsLogged = () => {
-      if (!logged) {
-        navigate("/");
-        return false;
-      }
-      return true;
-    };
-
-    if (onlylogged) {
-      const accessGranted = chechIsLogged();
-      setChangePage(accessGranted);
+    const user = localStorage.getItem("userData");
+    if (!user) {
+      navigate("/");
+      return;
     }
-  }, [onlylogged, navigate]);
+
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
+    const isAllowed = allowedRoles.includes(userData.userRol);
+
+    if (!isAllowed) {
+      navigate("/");
+      return;
+    }
+
+    setChangePage(true);
+    
+  }, [onlylogged, allowedRoles, navigate]);
 
   if (changePage) {
     return <Outlet />;
   }
+
+  return null;
 }

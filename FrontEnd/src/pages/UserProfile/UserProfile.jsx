@@ -6,6 +6,7 @@ import { PadLockIcon } from "../../components/icons/padlock-icon";
 import { EyeIcon } from "../../components/icons/eye-icon";
 import { HomeIcon } from "../../components/icons/home-icon";
 import imgProfile from "../../assets/img/default-img.webp";
+import {updateClient} from "../../services/ClientService";
 
 export default function UserProfile() {
   const user = JSON.parse(localStorage.getItem("userData"));
@@ -24,6 +25,27 @@ export default function UserProfile() {
     setShowPassword(!showPassword);
     ref.current.type = showPassword ? "password" : "text";
   };
+
+  const updateUser = async () => {
+    try {
+      const usuarioMod = {
+        userName: user.userName,
+        userEmail: inputEmailRef.current.value,
+        userPassword: inputPasswordRef.current.value,
+        userAddress: inputDireccionRef.current.value
+      };
+
+      const { userId } = JSON.parse(localStorage.getItem("userData"));
+      console.log(userId);
+
+      console.log( usuarioMod);
+      const response = await updateClient(userId, usuarioMod);
+      localStorage.setItem("userData", JSON.stringify(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const handleActiveFormToChangeUserData = () => {
     setChangeInfo(!changeInfo);
@@ -56,14 +78,14 @@ export default function UserProfile() {
               {changeInfo ? (
                 <button
                   className="flex items-center py-4 px-12 text-base-50 bg-emerald-400 h-12 w-12  gap-3 rounded-lg text-lg justify-center"
-                  onClick={handleActiveFormToChangeUserData}
+                  onClick={() => { handleActiveFormToChangeUserData(); updateUser(); }}
                 >
                   Aceptar
                 </button>
               ) : (
                 <button
                   className="flex items-center py-4 px-12 text-base-50 bg-[#307ebec0] h-12 w-12 gap-3 rounded-lg text-lg justify-center"
-                  onClick={handleActiveFormToChangeUserData}
+                  onClick= {handleActiveFormToChangeUserData}
                 >
                   Editar
                 </button>

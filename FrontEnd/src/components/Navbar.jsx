@@ -7,7 +7,12 @@ import { isLoggedIn } from "../services/ClientService";
 
 export const Navbar = ({ onSearch }) => {
   const isSearchVisible =
-    location.pathname === "/home" || location.pathname === "/";
+    location.pathname === "/home" || location.pathname === "/" || location.pathname === "/clientes";
+
+    const isClientesVisible =
+    location.pathname != "/clientes"
+
+  const user = JSON.parse(localStorage.getItem("userData"));
 
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
@@ -60,6 +65,14 @@ export const Navbar = ({ onSearch }) => {
             <Link to={`/login`}>
               <button className="bg-white text-black rounded p-2">
                 Iniciar Sesion
+              </button>
+            </Link>
+          )}
+
+          {loggedIn && user.userRol === "admin" && isClientesVisible && (
+            <Link to={`/clientes`}>
+              <button className="bg-white text-black rounded p-2">
+                Ver Usuarios
               </button>
             </Link>
           )}
