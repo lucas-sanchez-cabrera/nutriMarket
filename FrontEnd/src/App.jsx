@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import SignUp from "./pages/SingUp/SingUp";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Cart from "./pages/Cart/Cart";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
@@ -13,10 +14,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home />}></Route>
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/signUp" element={<SignUp/>}></Route>
-        <Route path="/userProfile" element={<UserProfile/>}></Route>
-        <Route path="/cart" element={<Cart/>}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signUp" element={<SignUp />}></Route>
+        <Route element={<PrivateRoute onlylogged={true} />}>
+          <Route path="/userProfile" element={<UserProfile />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
+        </Route>
       </Routes>
     </Router>
   );

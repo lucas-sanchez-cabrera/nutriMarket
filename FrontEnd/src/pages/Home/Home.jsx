@@ -38,14 +38,12 @@ export default function Home() {
       <Navbar onSearch={handleSearch} />
       <main className="flex gap-3 flex-wrap w-full justify-center ">
         {filteredProducts.map((product, index) => (
-         
           <div key={index}>
             <CardProduct product={product} />
             
           </div> 
           
         ))}
-      
       </main>
     </>
   );
