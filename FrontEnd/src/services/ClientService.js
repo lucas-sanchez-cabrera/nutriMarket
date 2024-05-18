@@ -47,3 +47,9 @@ export function isLoggedIn() {
   }
   return false;
 }
+
+
+export async function logout() {
+  localStorage.remove("userData");
+  return;
+}

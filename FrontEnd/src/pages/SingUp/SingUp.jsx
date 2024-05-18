@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import img1 from "../../assets/img/1.png";
 import { EyeIcon } from "../../components/icons/eye-icon";
 import { createClient } from "../../services/ClientService";
+import { signupUser } from "../../services/ClientService";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,8 @@ const SignUp = () => {
     if (user) {
       try {
         const response = await createClient(user);
+
+        
         localStorage.setItem("userData", JSON.stringify(response.data));
         navigate("/home");
       } catch (error) {
