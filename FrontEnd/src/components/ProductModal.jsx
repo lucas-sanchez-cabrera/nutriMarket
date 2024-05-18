@@ -17,14 +17,14 @@ const ProductModal = ({ product, isOpen, onClose }) => {
         <div className="flex flex-col items-start">
           <div className="flex gap-10 items-center">
             <img
-              src={product.productImage}
+              src={product.productPhotoUrl}
               alt={product.productName}
               className="rounded-full size-32 object-cover mb-4 border-gray-300 border"
             />
             <div>
               <h1 className="text-3xl font-bold mb-2">{product.productName}</h1>
               <h1 className="text-1xl font-semibold mb-2">
-                {product.productCateagory}
+                {product.productCategory}
               </h1>
               <h1 className="text-xl font-semibold text-red-600 mb-4">
                 {product.productPrice}€
@@ -32,9 +32,8 @@ const ProductModal = ({ product, isOpen, onClose }) => {
             </div>
           </div>
 
-          <div className="flex gap-4">
-            <h1 className="font-bold text-base">Descripión: </h1>
-            <p className="text-justify w-64">{product.productDescription}</p>
+          <div className="">
+            <p className="text-justify w-96 font-semibold">{product.productDescription}</p>
           </div>
 
 

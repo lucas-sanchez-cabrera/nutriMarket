@@ -8,13 +8,13 @@ import { HomeIcon } from "../../components/icons/home-icon";
 import imgProfile from "../../assets/img/default-img.webp";
 
 export default function UserProfile() {
+  const user = JSON.parse(localStorage.getItem("userData"));
+
   const [changeInfo, setChangeInfo] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [inputPassword, setInputPassword] = useState("felixmaricon");
-  const [inputEmail, setInputEmail] = useState("lucas.elzardo@gmail.com");
-  const [inputDireccion, setInputDireccion] = useState(
-    "Las Palmas de Gran Canaria, Tindaya, 12"
-  );
+  const [inputPassword, setInputPassword] = useState(user.userPassword);
+  const [inputEmail, setInputEmail] = useState(user.userEmail);
+  const [inputDireccion, setInputDireccion] = useState(user.userAddress);
 
   const inputPasswordRef = useRef("");
   const inputEmailRef = useRef("");
@@ -35,6 +35,7 @@ export default function UserProfile() {
       inputEmail.removeAttribute("disabled");
       inputPassword.removeAttribute("disabled");
       inputDireccion.removeAttribute("disabled");
+  
     } else {
       document.querySelectorAll("input").forEach((input) => {
         if (input !== inputPassword || showPassword) {
@@ -83,7 +84,7 @@ export default function UserProfile() {
                     <input
                       className="px-2 py-3 pl-10 w-96 bg-[#ffffff] rounded-md"
                       disabled
-                      value="Lucas Sanchez Cabrera"
+                      value= {user.userName}
                     />
                   </div>
                 </label>
@@ -138,20 +139,14 @@ export default function UserProfile() {
                       onChange={(e) => setInputPassword(e.target.value)}
                     />
                     <div
-                      className="absolute top-3 right-5 z-10 cursor-pointer"
-                      onClick={() =>
-                        togglePasswordVisibility(
-                          inputPasswordRef,
-                          showPassword,
-                          setShowPassword
-                        )
-                      }
-                    >
-                      {showPassword ? (
-                        <EyeIcon className="opacity-100" />
-                      ) : (
-                        <EyeIcon className="opacity-50" />
+                      className={`absolute top-3 right-5 z-10 cursor-pointer ${!changeInfo && "opacity-50 cursor-not-allowed"}`}
+                      onClick={() => changeInfo && togglePasswordVisibility(
+                        inputPasswordRef,
+                        showPassword,
+                        setShowPassword
                       )}
+                    >
+                      <EyeIcon className={showPassword ? "opacity-100" : "opacity-50"} />
                     </div>
                   </div>
                 </label>
