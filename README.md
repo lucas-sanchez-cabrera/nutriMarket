@@ -77,20 +77,3 @@
     </li>
     <li><strong>Crea un Pull Request</strong>.</li>
   </ol>
-
-  <h2>Licencia</h2>
-
-  <p>Este proyecto está bajo la Licencia MIT. Para más información, consulta el archivo <code>LICENSE</code>.</p>
-
-  <h2>Contacto</h2>
-
-  <p>Para cualquier pregunta o sugerencia, puedes contactar a los mantenedores del proyecto:</p>
-
-  <ul>
-    <li><strong>Nombre del Mantenedor:</strong> Tu Nombre</li>
-    <li><strong>Correo Electrónico:</strong> tu_correo@example.com</li>
-  </ul>
-
-  <hr>
-
-  <p>¡Gracias por utilizar nutriMarket! Tu satisfacción es nuestra prioridad.</p>
