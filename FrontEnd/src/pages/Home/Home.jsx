@@ -55,7 +55,7 @@ export default function Home() {
         {loggedIn && user.userRol === "admin" && (
           <div className="flex justify-end mr-36">
             <button
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex gap-4 items-center"
+              className="bg-emerald-400  hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded flex gap-4 items-center"
               onClick={openModal}
             >
               <PlusIcon className="fill-white size-4" />
@@ -63,7 +63,7 @@ export default function Home() {
             </button>
           </div>
         )}
-        <div className="flex-wrap flex justify-center">
+        <div className="flex-wrap flex justify-center items-center">
           {filteredProducts.map((product, index) => (
             <div key={index}> 
               <CardProduct product={product} />

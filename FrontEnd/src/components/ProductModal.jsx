@@ -6,14 +6,12 @@ const ProductModal = ({ product, isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-
       <div className="bg-white p-8 rounded-lg">
         <div className="flex justify-end">
           <button className="mb-4" onClick={onClose}>
             <CrossIcon className="stroke-black" />
           </button>
         </div>
-
         <div className="flex flex-col items-start">
           <div className="flex gap-10 items-center">
             <img
