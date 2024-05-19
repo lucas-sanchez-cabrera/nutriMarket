@@ -27,15 +27,15 @@ export async function loginUser(clientEmail, clientPassword) {
 }
 
 export async function deleteClientByPassword(clientPassword) {
-  return await axios.delete(`${ API_URL }/${ clientPassword }`);
+  return await axios.delete(`${ API_URL }/delete/${ clientPassword }`);
 }
 
 export async function deleteClientById(clientId) {
-  return await axios.delete(`${ API_URL }/${ clientId }`);
+  return await axios.delete(`${ API_URL }/delete/${ clientId }`);
 }
 
 export async function updateClient(clientId, clientMod) {
-  return await axios.post(`${ API_URL }/${ lientId }`, clientMod);
+  return await axios.post(`${ API_URL }/update/${ clientId }`, clientMod);
 }
 
 export function isLoggedIn() {
