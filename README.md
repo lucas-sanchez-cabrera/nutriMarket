@@ -1,7 +1,6 @@
-# nutriMarket
-<h1>nutriMarket</h1>
+<h1>NutriMarket</h1>
 
-  <p><strong>nutriMarket</strong> es una aplicación web desarrollada con <strong>React</strong>, <strong>JavaScript</strong> y <strong>Tailwind CSS</strong> que permite a los usuarios ver un catálogo de productos, registrarse o iniciar sesión, añadir y eliminar productos del carrito y ver los elementos que dispone.</p>
+  <p><strong>NutriMarket</strong> es una aplicación web desarrollada con <strong>React</strong>, <strong>JavaScript</strong> y <strong>Tailwind CSS</strong> que permite a los usuarios ver un catálogo de productos, registrarse o iniciar sesión, añadir y eliminar productos del carrito y ver los elementos que dispone.</p>
 
   <h2>Características</h2>
 
