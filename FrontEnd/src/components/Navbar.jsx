@@ -3,10 +3,18 @@ import { UserIcon } from "./icons/user-icon";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation hook
 import { CartIcon } from "./icons/cart-icon";
 import img1 from "../assets/img/1.2-removebg-preview.png";
+import { isLoggedIn } from "../services/ClientService";
 
 export const Navbar = ({ onSearch }) => {
   const isSearchVisible =
-    location.pathname === "/home" || location.pathname === "/";
+    location.pathname === "/home" || location.pathname === "/" || location.pathname === "/clientes";
+
+    const isClientesVisible =
+    location.pathname != "/clientes"
+
+  const user = JSON.parse(localStorage.getItem("userData"));
+
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   const isUserProfileInvisible = location.pathname != "/userProfile";
   const isCartInvisible = location.pathname != "/cart";
@@ -39,27 +47,35 @@ export const Navbar = ({ onSearch }) => {
         </div>
 
         <div className="mr-4 flex gap-5 items-center text-white/95 font-semibold">
-          {isUserProfileInvisible && (
+          {loggedIn && isUserProfileInvisible && (
             <div className="bg-gray-50 p-2 rounded-full">
               <Link to={`/userProfile`}>
                 <UserIcon className="fill-[#EFF1F999] stroke-black " />
               </Link>
             </div>
           )}
-
-          {isCartInvisible && (
+          {loggedIn && isCartInvisible && (
             <div>
               <Link to={`/cart`}>
                 <CartIcon className="size-9" />
               </Link>
             </div>
           )}
+          {!loggedIn && (
+            <Link to={`/login`}>
+              <button className="bg-white text-black rounded p-2">
+                Iniciar Sesion
+              </button>
+            </Link>
+          )}
 
-          <Link to={`/login`}>
-            <button className="bg-white text-black rounded p-2">
-              Iniciar Sesion
-            </button>
-          </Link>
+          {loggedIn && user.userRol === "admin" && isClientesVisible && (
+            <Link to={`/clientes`}>
+              <button className="bg-white text-black rounded p-2">
+                Ver Usuarios
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

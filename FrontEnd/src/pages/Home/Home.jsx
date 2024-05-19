@@ -2,14 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import { CardProduct } from "../../components/CardProduct";
 import ProductService from "../../services/ProductService";
+import { PlusIcon } from "../../components/icons/plus-icon";
+import NewProductModal from "../../components/NewProductModal";
 
 export default function Home() {
+  const user = JSON.parse(localStorage.getItem("userData"));
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Nuevo estado para controlar la apertura/cierre del modal
 
   const handleSearch = (query) => {
     setSearchQuery(query);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -36,18 +48,29 @@ export default function Home() {
   return (
     <>
       <Navbar onSearch={handleSearch} />
-      <main className="flex gap-3 flex-wrap w-full justify-center ">
-        {filteredProducts.map((product, index) => (
-         
-          <div key={index}>
-            <CardProduct product={product} />
-            
-          </div> 
-          
-        ))}
-      
+      <main className="flex flex-col w-full justify-center mt-10">
+        {user.userRol === "admin" && (
+          <div className="flex justify-end mr-36">
+            <button
+              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex gap-4 items-center"
+              onClick={openModal}
+            >
+              <PlusIcon className="fill-white size-4" />
+              Nuevo producto
+            </button>
+          </div>
+        )}
+
+        <div className="flex-wrap flex justify-center">
+          {filteredProducts.map((product, index) => (
+            <div key={index}>
+              <CardProduct product={product} />
+            </div>
+          ))}
+        </div>
       </main>
+
+      <NewProductModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 }
-
