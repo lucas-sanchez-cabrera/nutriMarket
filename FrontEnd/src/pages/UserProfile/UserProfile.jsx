@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
   const user = JSON.parse(localStorage.getItem("userData"));
+  const carrito = JSON.parse(localStorage.getItem("Carrito"));
   const navigate = useNavigate();
 
   const [changeInfo, setChangeInfo] = useState(false);
@@ -71,10 +72,9 @@ export default function UserProfile() {
 
   const handleLogout = () => {
     localStorage.removeItem("userData");
+    localStorage.removeItem("Carrito");
     navigate("/home");
   };
-
-
 
 
   return (
@@ -92,7 +92,7 @@ export default function UserProfile() {
               <div>
                 {changeInfo ? (
                   <button
-                    className="flex items-center py-4 px-12 text-base-50 bg-emerald-400 h-12 w-12  gap-3 rounded-lg text-lg justify-center"
+                    className="flex items-center py-4 px-12 text-base-50  h-12 w-12  gap-3 rounded-lg text-lg justify-center"
                     onClick={() => {
                       handleActiveFormToChangeUserData();
                       updateUser();

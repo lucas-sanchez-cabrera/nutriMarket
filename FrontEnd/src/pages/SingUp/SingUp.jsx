@@ -13,7 +13,7 @@ const SignUp = () => {
   const [direction, setDirection] = useState("");
   const rol = "cliente";
   const [showPassword, setShowPassword] = useState(false);
-  const passwordRef = useRef(null); // Use useRef for the password input
+  const passwordRef = useRef(null); 
 
   async function signUpUser(user) {
     if (user) {
