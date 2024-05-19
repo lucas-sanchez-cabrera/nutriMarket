@@ -9,15 +9,9 @@ export const Navbar = ({ onSearch }) => {
   const isSearchVisible =
     location.pathname === "/home" || location.pathname === "/" || location.pathname === "/clientes";
 
-    const isClientesVisible =
-    location.pathname != "/clientes"
-
   const user = JSON.parse(localStorage.getItem("userData"));
 
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
-
-  const isUserProfileInvisible = location.pathname != "/userProfile";
-  const isCartInvisible = location.pathname != "/cart";
 
   const handleSearch = (event) => {
     const query = event.target.value;
@@ -47,14 +41,14 @@ export const Navbar = ({ onSearch }) => {
         </div>
 
         <div className="mr-4 flex gap-5 items-center text-white/95 font-semibold">
-          {loggedIn && isUserProfileInvisible && (
+          {loggedIn && (
             <div className="bg-gray-50 p-2 rounded-full">
               <Link to={`/userProfile`}>
                 <UserIcon className="fill-[#EFF1F999] stroke-black " />
               </Link>
             </div>
           )}
-          {loggedIn && isCartInvisible && (
+          {loggedIn  && (
             <div>
               <Link to={`/cart`}>
                 <CartIcon className="size-9" />
@@ -69,7 +63,7 @@ export const Navbar = ({ onSearch }) => {
             </Link>
           )}
 
-          {loggedIn && user.userRol === "admin" && isClientesVisible && (
+          {loggedIn && user.userRol === "admin" && (
             <Link to={`/clientes`}>
               <button className="bg-white text-black rounded p-2">
                 Ver Usuarios

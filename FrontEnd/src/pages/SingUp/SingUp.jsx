@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import img1 from "../../assets/img/1.png";
 import { EyeIcon } from "../../components/icons/eye-icon";
 import { createClient } from "../../services/ClientService";
-import { signupUser } from "../../services/ClientService";
+import { loginUser } from "../../services/ClientService";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -20,9 +20,13 @@ const SignUp = () => {
       try {
         const response = await createClient(user);
 
-        
-        localStorage.setItem("userData", JSON.stringify(response.data));
-        navigate("/home");
+        const response2 = await loginUser(email, password);
+  
+        if (response2.status === 200) {
+          localStorage.setItem("userData", JSON.stringify(response2.data));
+          navigate("/home");
+        }
+
       } catch (error) {
         console.log(error);
       }
