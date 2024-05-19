@@ -4,10 +4,13 @@ import { Link, useLocation } from "react-router-dom"; // Import useLocation hook
 import { CartIcon } from "./icons/cart-icon";
 import img1 from "../assets/img/1.2-removebg-preview.png";
 import { isLoggedIn } from "../services/ClientService";
+import { QuestionMarkIcon } from "./icons/questionMark-icon";
 
 export const Navbar = ({ onSearch }) => {
   const isSearchVisible =
-    location.pathname === "/home" || location.pathname === "/" || location.pathname === "/clientes";
+    location.pathname === "/home" ||
+    location.pathname === "/" ||
+    location.pathname === "/clientes";
 
   const user = JSON.parse(localStorage.getItem("userData"));
 
@@ -48,7 +51,7 @@ export const Navbar = ({ onSearch }) => {
               </Link>
             </div>
           )}
-          {loggedIn  && (
+          {loggedIn && (
             <div>
               <Link to={`/cart`}>
                 <CartIcon className="size-9" />
@@ -70,6 +73,12 @@ export const Navbar = ({ onSearch }) => {
               </button>
             </Link>
           )}
+
+          <div className="p-2 ">
+            <Link to={`/help`}>
+              <QuestionMarkIcon className=" stroke-black size-9" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

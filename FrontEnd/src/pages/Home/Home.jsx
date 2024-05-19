@@ -32,7 +32,6 @@ export default function Home() {
         const response = await ProductService.getProducts();
         setProducts(response.data);
         setFilteredProducts(response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
