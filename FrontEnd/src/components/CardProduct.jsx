@@ -15,7 +15,7 @@ export const CardProduct = ({ product }) => {
   };
 
   return (
-    <div className="flex flex-col m-10 border border-black rounded-t-[10px] rounded-b-[10px]">
+    <div className="flex flex-col m-10 border border-gray-200 rounded-t-[10px] rounded-b-[10px] shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
       <div className="justify-between rounded-t-[10px] w-64">
         <img src={product.productPhotoUrl} alt={product.productName} className="rounded-t-[10px] w-full h-52" />
       </div>
@@ -38,7 +38,7 @@ export const CardProduct = ({ product }) => {
           </div>
         </div>
         <div className="flex justify-between gap-2">
-          <h1 className="font-bold text-xl">{product.productName}</h1>
+          <h1 className="font-bold text-xl w-full">{product.productName}</h1>
         </div>
       </div>
       <ProductModal product={product} isOpen={isModalOpen} onClose={handleCloseModal} />

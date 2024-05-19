@@ -47,9 +47,9 @@ export default function Clientes() {
 
   return (
     <>
-      <Navbar onSearch={handleSearch} /> {/* Pasar la función de búsqueda como prop */}
+      <Navbar onSearch={handleSearch} /> 
       <main className="flex justify-center items-center min-h-screen bg-gray-100 pb-8">
-        <div className="flex flex-col items-center w-full sm:w-5/6 md:w-4/5 lg:w-3/4 xl:w-2/3 m-10">
+        <div className="flex flex-col items-center w-full sm:w-5/6 md:w-4/5 lg:w-3/4 xl:w-2/3 m-10 ">
           <div className="shadow-lg rounded-lg overflow-hidden w-full bg-white">
             <table className="table-auto w-full divide-y divide-gray-200">
               <thead className="bg-gray-200">

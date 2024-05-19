@@ -37,7 +37,7 @@ export async function deleteClientById(clientId) {
 }
 
 export async function updateClient(clientId, clientMod) {
-  return await axios.post(`${API_URL}/${clientId}`, clientMod);
+  return await axios.put(`${ API_URL }/update/${ clientId }`, clientMod);
 }
 
 export function isLoggedIn() {
@@ -50,6 +50,6 @@ export function isLoggedIn() {
 
 
 export async function logout() {
-  localStorage.remove("userData");
+  localStorage.removeItem("userData");
   return;
 }

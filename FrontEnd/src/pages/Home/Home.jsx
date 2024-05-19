@@ -4,13 +4,15 @@ import { CardProduct } from "../../components/CardProduct";
 import ProductService from "../../services/ProductService";
 import { PlusIcon } from "../../components/icons/plus-icon";
 import NewProductModal from "../../components/NewProductModal";
+import { isLoggedIn } from "../../services/ClientService";
 
 export default function Home() {
   const user = JSON.parse(localStorage.getItem("userData"));
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // Nuevo estado para controlar la apertura/cierre del modal
+  const [isModalOpen, setIsModalOpen] = useState(false); //Estado para controlar la apertura/cierre del modal
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -30,6 +32,7 @@ export default function Home() {
         const response = await ProductService.getProducts();
         setProducts(response.data);
         setFilteredProducts(response.data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -48,8 +51,8 @@ export default function Home() {
   return (
     <>
       <Navbar onSearch={handleSearch} />
-      <main className="flex flex-col w-full justify-center mt-10">
-        {user.userRol === "admin" && (
+      <main className="flex flex-col justify-center mt-10">
+        {loggedIn && user.userRol === "admin" && (
           <div className="flex justify-end mr-36">
             <button
               className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex gap-4 items-center"
@@ -60,10 +63,9 @@ export default function Home() {
             </button>
           </div>
         )}
-
         <div className="flex-wrap flex justify-center">
           {filteredProducts.map((product, index) => (
-            <div key={index}>
+            <div key={index}> 
               <CardProduct product={product} />
             </div>
           ))}

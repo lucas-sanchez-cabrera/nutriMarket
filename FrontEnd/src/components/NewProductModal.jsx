@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CrossIcon } from "./icons/cross-icon";
+import ProductService from "../services/ProductService";
 
 const NewProductModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,17 @@ const NewProductModal = ({ isOpen, onClose }) => {
       productPhotoUrl: formData.url
     };
 
-    console.log(producto);
+    try {
+      const response =  ProductService.createProduct(producto);
+      
+    
+    } catch (error) {
+      console.log(error);
+    }
+
+    
+
+
     onClose(); 
   };
 
