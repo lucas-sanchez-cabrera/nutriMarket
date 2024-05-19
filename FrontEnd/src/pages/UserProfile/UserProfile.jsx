@@ -6,15 +6,21 @@ import { PadLockIcon } from "../../components/icons/padlock-icon";
 import { EyeIcon } from "../../components/icons/eye-icon";
 import { HomeIcon } from "../../components/icons/home-icon";
 import imgProfile from "../../assets/img/default-img.webp";
+import { updateClient } from "../../services/ClientService";
+import { LogOutIcon } from "../../components/icons/logout-icon";
+import { useNavigate } from "react-router-dom";
+
 
 export default function UserProfile() {
+  const user = JSON.parse(localStorage.getItem("userData"));
+  const carrito = JSON.parse(localStorage.getItem("Carrito"));
+  const navigate = useNavigate();
+
   const [changeInfo, setChangeInfo] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [inputPassword, setInputPassword] = useState("felixmaricon");
-  const [inputEmail, setInputEmail] = useState("lucas.elzardo@gmail.com");
-  const [inputDireccion, setInputDireccion] = useState(
-    "Las Palmas de Gran Canaria, Tindaya, 12"
-  );
+  const [inputPassword, setInputPassword] = useState(user.userPassword);
+  const [inputEmail, setInputEmail] = useState(user.userEmail);
+  const [inputDireccion, setInputDireccion] = useState(user.userAddress);
 
   const inputPasswordRef = useRef("");
   const inputEmailRef = useRef("");
@@ -23,6 +29,26 @@ export default function UserProfile() {
   const togglePasswordVisibility = (ref, showPassword, setShowPassword) => {
     setShowPassword(!showPassword);
     ref.current.type = showPassword ? "password" : "text";
+  };
+
+  const updateUser = async () => {
+    try {
+      const usuarioMod = {
+        userName: user.userName,
+        userEmail: inputEmailRef.current.value,
+        userPassword: inputPasswordRef.current.value,
+        userAddress: inputDireccionRef.current.value,
+      };
+
+      const { userId } = JSON.parse(localStorage.getItem("userData"));
+      console.log(userId);
+
+      console.log(usuarioMod);
+      const response = await updateClient(userId, usuarioMod);
+      localStorage.setItem("userData", JSON.stringify(response.data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleActiveFormToChangeUserData = () => {
@@ -44,29 +70,45 @@ export default function UserProfile() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("Carrito");
+    navigate("/home");
+  };
+
+
   return (
     <>
       <Navbar />
       <main className="flex m-10 justify-center ">
-        <section className="bg-[#a7a9b14b] w-[60%] flex flex-col mt-24 h-[87%] rounded-md p-6">
+        <section className="bg-[#a7a9b14b] w-[60%] flex flex-col mt-24 h-[87%] rounded-md p-6 shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
           <header className="flex justify-between w-full">
             <h4 className="text-2xl font-semibold">Configuración</h4>
-            <div>
-              {changeInfo ? (
-                <button
-                  className="flex items-center py-4 px-12 text-base-50 bg-emerald-400 h-12 w-12  gap-3 rounded-lg text-lg justify-center"
-                  onClick={handleActiveFormToChangeUserData}
-                >
-                  Aceptar
-                </button>
-              ) : (
-                <button
-                  className="flex items-center py-4 px-12 text-base-50 bg-[#307ebec0] h-12 w-12 gap-3 rounded-lg text-lg justify-center"
-                  onClick={handleActiveFormToChangeUserData}
-                >
-                  Editar
-                </button>
-              )}
+            <div className="flex gap-5">
+              <button className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded flex gap-4 items-center" onClick={handleLogout}>
+                <LogOutIcon className="stroke-white" />
+              </button>
+
+              <div>
+                {changeInfo ? (
+                  <button
+                    className="flex items-center py-4 px-12 text-base-50  h-12 w-12  gap-3 rounded-lg text-lg justify-center"
+                    onClick={() => {
+                      handleActiveFormToChangeUserData();
+                      updateUser();
+                    }}
+                  >
+                    Aceptar
+                  </button>
+                ) : (
+                  <button
+                    className="flex items-center py-4 px-12 text-base-50 bg-[#307ebec0] hover:bg-[#307ebe] h-12 w-12 gap-3 rounded-lg text-lg justify-center"
+                    onClick={handleActiveFormToChangeUserData}
+                  >
+                    Editar
+                  </button>
+                )}
+              </div>
             </div>
           </header>
           <section className="h-full  w-full mt-10">
@@ -83,7 +125,7 @@ export default function UserProfile() {
                     <input
                       className="px-2 py-3 pl-10 w-96 bg-[#ffffff] rounded-md"
                       disabled
-                      value="Lucas Sanchez Cabrera"
+                      value={user.userName}
                     />
                   </div>
                 </label>
@@ -138,8 +180,11 @@ export default function UserProfile() {
                       onChange={(e) => setInputPassword(e.target.value)}
                     />
                     <div
-                      className="absolute top-3 right-5 z-10 cursor-pointer"
+                      className={`absolute top-3 right-5 z-10 cursor-pointer ${
+                        !changeInfo && "opacity-50 cursor-not-allowed"
+                      }`}
                       onClick={() =>
+                        changeInfo &&
                         togglePasswordVisibility(
                           inputPasswordRef,
                           showPassword,
@@ -147,11 +192,9 @@ export default function UserProfile() {
                         )
                       }
                     >
-                      {showPassword ? (
-                        <EyeIcon className="opacity-100" />
-                      ) : (
-                        <EyeIcon className="opacity-50" />
-                      )}
+                      <EyeIcon
+                        className={showPassword ? "opacity-100" : "opacity-50"}
+                      />
                     </div>
                   </div>
                 </label>
