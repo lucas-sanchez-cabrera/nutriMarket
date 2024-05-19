@@ -8,6 +8,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import Cart from "./pages/Cart/Cart";
 import PrivateRoute from "./utils/PrivateRoute";
 import Clientes from "./pages/Clientes/Clientes";
+import Help from "./pages/Help/Help";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signUp" element={<SignUp />}></Route>
+        <Route path="/help" element={<Help />}></Route>
+
         <Route
           element={
             <PrivateRoute
@@ -28,12 +31,9 @@ function App() {
           <Route path="/userProfile" element={<UserProfile />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
         </Route>
-        <Route element={
-            <PrivateRoute
-              onlylogged={true}
-              allowedRoles={["admin"]}
-            />
-          }>
+        <Route
+          element={<PrivateRoute onlylogged={true} allowedRoles={["admin"]} />}
+        >
           <Route path="/clientes" element={<Clientes />}></Route>
         </Route>
       </Routes>

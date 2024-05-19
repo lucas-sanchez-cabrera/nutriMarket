@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CrossIcon } from "./icons/cross-icon";
 import TicketModal from "./TicketModal";
+import { makePayment } from "../services/Payment";
 
 const PagarModal = ({ isOpen, onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,8 +18,27 @@ const PagarModal = ({ isOpen, onClose }) => {
     setIsModalOpen(false);
   };
 
-  const handlePay = () => {
-    setIsModalOpen(true);
+  const handlePay = async () => {
+    try {
+      const creditCard = {
+        cardNumber: cardNumber,
+        cardholderName: cardholderName,
+        expiryDate: expiryDate,
+        cvv: cvv,
+        amount: 20,
+      };
+
+      const response = await makePayment(creditCard);
+
+      if (response.status === 200) {
+        openModal();
+      } else {
+        console.log(response.message);
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (!isOpen) return null;
@@ -63,7 +83,9 @@ const PagarModal = ({ isOpen, onClose }) => {
               />
             </div>
             <div className="w-2/4">
-              <label className="block text-gray-700 ">Fecha de Expiración</label>
+              <label className="block text-gray-700">
+                Fecha de Expiración
+              </label>
               <input
                 type="text"
                 value={expiryDate}
