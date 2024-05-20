@@ -38,7 +38,7 @@
 
   <h2>Uso</h2>
 
-  <p>Una vez que la aplicación esté en funcionamiento, puedes acceder a ella a través de <code>http://localhost:3000</code>.</p>
+  <p>Una vez que la aplicación esté en funcionamiento, puedes acceder a ella a través de <code>http://localhost:5173/</code>.</p>
 
   <ul>
     <li><strong>Catálogo de Productos:</strong> Navega por los productos disponibles.</li>
